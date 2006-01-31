@@ -1,0 +1,23 @@
+public interface TreeNodeVisitor {
+	public void visit(TreeNode node);
+	public void visit(ArgumentsNode node);
+	public void visit(AssignNode node);
+	public void visit(BlockNode node);
+	public void visit(CallNode node);
+	public void visit(CastIntRealNode node);
+	public void visit(CastRealIntNode node);
+	public void visit(CompareNode node);
+	public void visit(ConditionNode node);
+	public void visit(ConstantNode node);
+	public void visit(ExpressionNode node);
+	public void visit(FunctionDeclarationNode node);
+	public void visit(IdentifierNode node);
+	public void visit(IfNode node);
+	public void visit(LValueNode node);
+	public void visit(ParametersNode node);
+	public void visit(ProgramNode node);
+	public void visit(ReturnNode node);
+	public void visit(TypeNode node);
+	public void visit(VariableDeclarationNode node);
+	public void visit(WhileNode node);
+}

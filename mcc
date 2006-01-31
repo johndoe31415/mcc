@@ -1,0 +1,9 @@
+#!/bin/sh
+if [ "${JAVA}" == "" ]
+then
+	echo "Error: JAVA environment variable not set"
+	exit 1
+fi
+
+location=`echo $0 | sed 's/[^\/]*$//'`
+$JAVA -classpath ${location}build/ mcc $*

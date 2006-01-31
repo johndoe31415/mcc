@@ -1,0 +1,33 @@
+Control statements are always followed by a single space.
+if (...
+for (...
+while (...
+
+Binary operators have a single space to the left and right.
+a = q + 4;
+
+Variablenames are always lowercase.
+int attrib;
+
+Classnames are always capitalized.
+class Foo {
+}
+
+Condition fragments have to be in brackets.
+if ((a && b) || (c && d)) {
+}
+
+Code blocks should always have explicit curly braces.
+if (condition) {
+	a = b;
+}
+else {
+	a = c;
+}
+
+Between function definitions there is always exactly one empty line.
+void foo() {
+}
+
+void bar() {
+}

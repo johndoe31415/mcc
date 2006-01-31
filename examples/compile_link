@@ -1,0 +1,24 @@
+#!/bin/sh
+#
+#
+
+TEMPFILE="compile_link.tmp"
+if [ "$1" != "" ]; then
+	echo "$1" > "$TEMPFILE"
+fi
+
+if [ ! -f "${TEMPFILE}" ]; then
+	echo "Parameter?"
+	exit 1
+fi
+
+FILE=`cat "$TEMPFILE"`
+if [ ! -f "${FILE}.s" ] || [ "$1" != "" ]; then
+	cd ../src
+	./mcc --arch ia32 -S "../examples/${FILE}.s" "../examples/${FILE}.e"
+	cd ../examples
+fi
+as -ggdb3 "${FILE}.s" -o "${FILE}.o"
+ld -e start "${FILE}.o" /usr/lib/libc.a -o "${FILE}"
+./${FILE}
+

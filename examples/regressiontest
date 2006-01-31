@@ -1,0 +1,48 @@
+#!/bin/bash
+
+DIFF='diff'
+RUN='powerpc-eabi-run'
+# rebuilding tests
+cd ..
+make testall
+cd examples/
+
+rm -f regressiontest.results
+for file in *.e
+do
+	base=`echo "$file" | sed -r 's/\.[^\.]*$$//'`
+
+	if [[ -f $base.in && -f $base.out ]]
+	then
+		cd ..
+		make examples/$base
+		cd examples
+		echo "testing $base for regressions"
+		${RUN} ./$base < $base.in > out
+		${DIFF} out $base.out
+		result="$?"
+		if [ "$result" == "0" ]; then
+			printf "%-20s was tested: OK\n" "$base" >> regressiontest.results
+		else
+			printf "%-20s was tested: ==> BROKEN <==\n" "$base" >> regressiontest.results
+		fi
+	elif [[ -f $base.out ]]
+	then
+		cd ..
+		make examples/$base
+		cd examples
+		echo "testing $base for regressions"
+		${RUN} ./$base > out
+		${DIFF} out $base.out
+		result="$?"
+		if [ "$result" == "0" ]; then
+			printf "%-20s was tested: OK\n" "$base" >> regressiontest.results
+		else
+			printf "%-20s was tested: ==> BROKEN <==\n" "$base" >> regressiontest.results
+		fi
+	else
+		echo skipping $base
+	fi
+done
+
+cat regressiontest.results

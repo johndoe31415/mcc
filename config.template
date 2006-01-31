@@ -1,0 +1,11 @@
+export JAVAC=javac
+export JAVA=java
+export BYACCJ=byaccj
+export JLEX=JLex.Main
+export CLASSPATH=$CLASSPATH:<jlex parent directory>
+export PATH=<byaccj directory>:${PATH}
+export JDK_HOME=<jdk directory>
+export JAVA_HOME=${JDK_HOME}
+export JAVAC=${JDK_HOME}/bin/javac
+export PATH=${JDK_HOME}/bin:${JDK_HOME}/jre/bin:${PATH}
+export MANPATH=${MANPATH}:${JDK_HOME}/man

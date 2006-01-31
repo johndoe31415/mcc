@@ -1,0 +1,69 @@
+#include "mcclib.c"
+
+int up[15];
+int down[15];
+int rows[8];
+int x[8];
+
+
+int print()
+{
+	int k;
+	int d;
+	k=0;
+	while (k < 8){
+	  d=writeInt(x[k]+1);
+	  d=writeChar(32);
+	  k=k+1;
+	}
+	d=writeChar(10);
+	return 0;
+}
+
+
+int queens(int c)
+{
+	int r;
+	int d;
+	r=0;
+	while (r < 8){
+		if (rows[r]!=0 && up[r-c+7]!=0 && down[r+c]!=0) {
+			rows[r] = 0;
+			up[r-c+7] = 0;
+			down[r+c] = 0;
+			x[c] = r;
+			if (c == 7){
+				d=print();
+			}else{
+				d=queens(c + 1);
+			}
+			rows[r] = 1;
+			up[r-c+7] = 1;
+			down[r+c] = 1;
+		}
+		r=r+1;
+	}
+	return 0;
+}
+
+
+int main()
+{
+	int i;
+
+	i=0;
+	while (i < 15){
+		up[i] = 1;
+		down[i] = 1;
+		i=i+1;
+		}
+	i=0;
+	while (i < 8){
+		rows[i] = 1;
+		i=i+1;
+	}
+	i=queens(0);
+	return 0;
+}
+
+
